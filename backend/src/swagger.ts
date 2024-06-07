@@ -7,6 +7,7 @@ export function setupSwagger(app: INestApplication): void {
   const options = new DocumentBuilder()
     .setVersion(VERSION)
     .setTitle('NestJS')
+    .addApiKey({ type: 'apiKey', in: 'header' }, 'Api-Key')
     .addBearerAuth()
     .build();
 

@@ -6,8 +6,10 @@ import { LoginDto } from './dtos/login.dto';
 import { GetAuthUser } from '../../decorators/get-auth-user.decorator';
 import { JwtAndRolesGuard } from '../../decorators/jwt-roles-guard.decorator';
 import { UserDto } from './dtos/user.dto';
+import { ApiKeyAuth } from '../../decorators/api-key-auth.decorator';
 
 @InitController('user')
+@ApiKeyAuth()
 export class UserController {
   constructor(private readonly _userService: UserService) {}
 

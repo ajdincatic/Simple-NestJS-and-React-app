@@ -9,6 +9,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { Client } from './entities/client.entity';
 import { Photo } from './entities/photo.entity';
+import { ApiKeyStrategy } from './auth/auth-header-api-key.strategy';
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { Photo } from './entities/photo.entity';
     }),
   ],
   controllers: [UserController],
-  providers: [UserService, AuthService, JwtStrategy],
+  providers: [UserService, AuthService, JwtStrategy, ApiKeyStrategy],
   exports: [UserService],
 })
 export class UserModule {}

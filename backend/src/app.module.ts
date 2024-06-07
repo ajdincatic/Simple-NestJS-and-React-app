@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { UserModule } from './api/user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Env } from './shared/enums/env.enum';
 import { PasswordSubscriber } from './shared/entity-subscribers/password-subscriber';
 import { AwsModule } from './api/aws/aws.module';
+import { ApiKeyMiddleware } from './middlewares/api-key.middleware';
 
 @Module({
   imports: [
@@ -35,4 +36,8 @@ import { AwsModule } from './api/aws/aws.module';
     AwsModule,
   ],
 })
-export class AppModule {}
+export class AppModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(ApiKeyMiddleware).forRoutes('*');
+  }
+}
