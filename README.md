@@ -1,1 +1,1 @@
-# Simple-NestJS-and-React-app
+# Simple NestJS and React application
