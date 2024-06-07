@@ -24,5 +24,6 @@ import { Photo } from './entities/photo.entity';
   ],
   controllers: [UserController],
   providers: [UserService, AuthService, JwtStrategy],
+  exports: [UserService],
 })
 export class UserModule {}

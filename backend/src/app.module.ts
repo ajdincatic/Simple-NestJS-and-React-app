@@ -4,6 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Env } from './shared/enums/env.enum';
 import { PasswordSubscriber } from './shared/entity-subscribers/password-subscriber';
+import { AwsModule } from './api/aws/aws.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { PasswordSubscriber } from './shared/entity-subscribers/password-subscri
     }),
     // custom modules
     UserModule,
+    AwsModule,
   ],
 })
 export class AppModule {}
