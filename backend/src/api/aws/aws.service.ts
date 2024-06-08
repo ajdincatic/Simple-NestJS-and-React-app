@@ -2,6 +2,7 @@ import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
 import { Injectable } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
+import { UploadResultDto } from './dtos/upload-result.dto';
 
 @Injectable()
 export class AwsService {
@@ -17,8 +18,8 @@ export class AwsService {
     });
   }
 
-  async uploadMultipleFilesToAws(files: Express.Multer.File[]): Promise<any> {
-    const result = {
+  async uploadFiles(files: Express.Multer.File[]): Promise<UploadResultDto> {
+    const result: UploadResultDto = {
       successfull: [],
       failed: [],
     };

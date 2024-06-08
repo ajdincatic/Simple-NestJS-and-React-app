@@ -6,6 +6,7 @@ import { Env } from './shared/enums/env.enum';
 import { PasswordSubscriber } from './shared/entity-subscribers/password-subscriber';
 import { AwsModule } from './api/aws/aws.module';
 import { ApiKeyMiddleware } from './middlewares/api-key.middleware';
+import { AuthModule } from './api/auth/auth.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { ApiKeyMiddleware } from './middlewares/api-key.middleware';
       }),
     }),
     // custom modules
+    AuthModule,
     UserModule,
     AwsModule,
   ],

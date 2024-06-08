@@ -12,6 +12,6 @@ export class AwsController {
   @Post('upload-files')
   @FileUpload()
   async uploadImage(@UploadedFiles() files: Express.Multer.File[]) {
-    return this._awsService.uploadMultipleFilesToAws(files);
+    return this._awsService.uploadFiles(files);
   }
 }
