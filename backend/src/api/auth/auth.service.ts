@@ -11,7 +11,8 @@ import { LoginDto } from '../user/dtos/login.dto';
 import { RegisterUserDto } from '../user/dtos/register-user.dto';
 import { Client } from '../user/entities/client.entity';
 import { Photo } from '../user/entities/photo.entity';
-import { SuccessfullyCreated } from '../../types/successfuly-created.type';
+import { SuccessfullyCreated } from '../../shared/types/successfuly-created.type';
+import { DEFAULT_AVATAR_URL } from '../../shared/constants';
 
 @Injectable()
 export class AuthService {
@@ -25,8 +26,6 @@ export class AuthService {
     private readonly _configService: ConfigService,
     private readonly _jwtService: JwtService,
   ) {}
-
-  private readonly defaultAvatarUrl = 'https://picsum.photos/200/300';
 
   async login(loginDto: LoginDto): Promise<LoggedUserDto> {
     const user = await this._userRepository
@@ -70,11 +69,10 @@ export class AuthService {
     const client = new Client();
     client.firstName = firstName;
     client.lastName = lastName;
-    client.fullName = `${firstName} ${lastName}`;
     client.email = email;
     client.password = password;
     client.active = true;
-    client.avatarUrl = this.defaultAvatarUrl;
+    client.avatarUrl = DEFAULT_AVATAR_URL;
 
     const savedClient = await this._clientRepository.save(client);
 

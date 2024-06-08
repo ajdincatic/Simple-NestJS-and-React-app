@@ -3,7 +3,7 @@ import { UserModule } from './api/user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Env } from './shared/enums/env.enum';
-import { PasswordSubscriber } from './shared/entity-subscribers/password-subscriber';
+import { UserSubscriber } from './shared/entity-subscribers/user-subscriber';
 import { AwsModule } from './api/aws/aws.module';
 import { ApiKeyMiddleware } from './middlewares/api-key.middleware';
 import { AuthModule } from './api/auth/auth.module';
@@ -29,7 +29,7 @@ import { AuthModule } from './api/auth/auth.module';
         synchronize: true,
         logging: _configService.get('NODE_ENV') === Env.DEV,
         entities: [`${__dirname}/**/*.entity{.ts,.js}`],
-        subscribers: [PasswordSubscriber],
+        subscribers: [UserSubscriber],
       }),
     }),
     // custom modules
