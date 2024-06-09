@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { endpoints } from "../../shared/constants";
-import { UserAfterLogin } from "../../shared/interfaces";
+import { endpoints } from '../../shared/constants';
+import { LoginPayload, UserAfterLogin } from '../../shared/types';
 
 const initialState: {
   loading: boolean;
@@ -13,28 +13,24 @@ const initialState: {
   user: null,
 };
 
-type LoginPayload = {
-  email: string;
-  password: string;
-};
-
 export const userLogin = createAsyncThunk(
-  "auth/login",
+  'auth/login',
   async ({ email, password }: LoginPayload, { rejectWithValue }) => {
     try {
       const response = await axios.post(
         endpoints.LOGIN,
-        JSON.stringify({ email, password })
+        JSON.stringify({ email, password }),
       );
+
       return response.data;
     } catch (error: any) {
-      return rejectWithValue(error?.message);
+      return rejectWithValue(error.response.data);
     }
-  }
+  },
 );
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     logout: (state) => {

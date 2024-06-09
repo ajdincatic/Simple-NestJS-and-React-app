@@ -3,3 +3,9 @@ export const endpoints = {
   LOGIN: `login`,
   ME: `users/me`,
 };
+
+export const routes = {
+  REGISTER: `/register`,
+  LOGIN: `/login`,
+  PROFILE: `/profile`,
+};
