@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Alert, Container } from 'react-bootstrap';
+import { CustomInput, InputTypes } from './shared/custom-input';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from './styles/register.module.css';
-import { CustomInput, InputTypes } from './shared/custom-input';
 
 interface FormData {
   firstName: string;
   lastName: string;
   email: string;
   password: string;
-  photos: FileList;
+  photos: FileList | null;
 }
 
 export const Register = () => {
+  const navigate = useNavigate();
+
   const {
     control,
     handleSubmit,
     formState: { errors, isValid },
+    setValue,
   } = useForm<FormData>({
     mode: 'onChange',
     defaultValues: {
@@ -26,15 +30,34 @@ export const Register = () => {
       lastName: '',
       email: '',
       password: '',
-      photos: undefined,
+      photos: null,
     },
   });
 
   const [error, setError] = useState('');
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+
+    if (files) {
+      setValue('photos', files, { shouldValidate: true });
+
+      const previews = Array.from(files).map((file) =>
+        URL.createObjectURL(file),
+      );
+      setImagePreviews(previews);
+    }
+  };
 
   const onSubmit = async (data: FormData) => {
     if (data.photos.length < 4) {
       setError('At least 4 photos should be selected.');
+
+      setTimeout(() => {
+        setError('');
+      }, 3000);
+
       return;
     }
   };
@@ -149,28 +172,53 @@ export const Register = () => {
         <Controller
           name="photos"
           control={control}
-          rules={{ required: 'At least 4 photos are required' }}
+          rules={{
+            validate: (files) =>
+              (files && files.length >= 4) || 'At least 4 photos are required',
+          }}
           render={({ field }) => (
-            <CustomInput
-              inputType={InputTypes.FILE}
-              name="photos"
-              label="Photos"
-              error={errors.photos?.message}
-              value={
-                field.value
-                  ? Array.from(field.value)
-                      .map((file) => file.name)
-                      .join(', ')
-                  : ''
-              }
-              onChange={(e) => field.onChange(e.target.files)}
-            />
+            <div>
+              <CustomInput
+                inputType={InputTypes.FILE}
+                name="photos"
+                label="Photos"
+                error={errors.photos?.message}
+                multiple={true}
+                value={
+                  field.value
+                    ? Array.from(field.value)
+                        .map((file) => file.name)
+                        .join(', ')
+                    : ''
+                }
+                onChange={handleImageChange}
+              />
+              <div className={styles.imagePreviews}>
+                {imagePreviews.map((src, index) => (
+                  <img
+                    key={index}
+                    src={src}
+                    alt={`preview ${index}`}
+                    className="img-thumbnail"
+                  />
+                ))}
+              </div>
+            </div>
           )}
         />
 
-        <Button variant="primary" type="submit" disabled={!isValid}>
-          Register
-        </Button>
+        <div className="d-flex justify-content-between">
+          <Button
+            variant="secondary"
+            className="mr-2"
+            onClick={() => navigate('/login')}
+          >
+            Go back
+          </Button>
+          <Button variant="primary" type="submit" disabled={!isValid}>
+            Register
+          </Button>
+        </div>
 
         {error && (
           <Alert className="mt-3" variant="danger">

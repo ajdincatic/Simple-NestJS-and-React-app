@@ -44,6 +44,7 @@ type Props = {
   max?: number;
   setLabel?: boolean;
   disabled?: boolean;
+  multiple?: boolean;
   onKeyDown?: FormControlProps['onKeyDown'];
   unselectedByDefault?: boolean;
 };
@@ -65,6 +66,7 @@ export const CustomInput = ({
   max,
   setLabel = true,
   disabled,
+  multiple,
   onKeyDown,
 }: Props) => (
   <Form.Group className={className} controlId={controlId}>
@@ -92,6 +94,7 @@ export const CustomInput = ({
           type="file"
           disabled={disabled}
           accept="image/*"
+          multiple={multiple}
           onChange={onChange as FormControlProps['onChange']}
         />
         <Form.Control

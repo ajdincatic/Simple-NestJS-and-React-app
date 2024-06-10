@@ -16,14 +16,6 @@
   width: 35%;
 }
 
-.copyrightContainer {
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
-  height: calc(100vh - 530px);
-  margin-top: 32px;
-}
-
 .p {
   text-align: center;
   display: block;
