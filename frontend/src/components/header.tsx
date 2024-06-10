@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { NavDropdown } from 'react-bootstrap';
 import { logout } from '../redux/reducers/login';
 import { useAppDispatch } from '../shared/custom-hooks';
+import { AlertModal } from './shared/alert-modal';
 
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import { AlertModal } from './shared/alert-modal';
 
 export const Header = ({ user }) => {
   const dispatch = useAppDispatch();

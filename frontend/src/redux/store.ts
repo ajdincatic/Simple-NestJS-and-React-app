@@ -12,8 +12,9 @@ import storage from 'redux-persist/lib/storage';
 
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import loginReducer from './reducers/login';
-import registerReducer from './reducers/register';
+import login from './reducers/login';
+import register from './reducers/register';
+import me from './reducers/me';
 
 const persistConfig = {
   key: 'root',
@@ -21,8 +22,9 @@ const persistConfig = {
 };
 
 const rootReducers = combineReducers({
-  auth: persistReducer(persistConfig, loginReducer),
-  registerReducer,
+  auth: persistReducer(persistConfig, login),
+  register,
+  me,
 });
 
 export const store = configureStore({

@@ -38,3 +38,29 @@ export type SuccessfullyCreated = {
   success: boolean;
   id: number;
 };
+
+interface Photo {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  name: string;
+  url: string;
+}
+
+interface User {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  firstName: string;
+  lastName: string;
+  fullName: string;
+  email: string;
+  active: boolean;
+  avatarUrl: string;
+}
+
+export interface UserProfile {
+  user: User;
+  photos: Photo[];
+  token: string;
+}
