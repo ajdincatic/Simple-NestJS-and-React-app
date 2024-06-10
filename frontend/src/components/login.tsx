@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Alert, Container, Image } from 'react-bootstrap';
-import { userLogin } from '../redux/reducers/auth';
+import { userLogin } from '../redux/reducers/login';
 import { CustomInput, InputTypes } from './shared/custom-input';
 import { LoadingSpinner } from './shared/loading-spinner';
 import { useAppDispatch, useAppSelector } from '../shared/custom-hooks';

@@ -1,10 +1,10 @@
-import axios from "axios";
-import { logout } from "../redux/reducers/auth";
-import { store } from "../redux/store";
+import axios from 'axios';
+import { logout } from '../redux/reducers/login';
+import { store } from '../redux/store';
 
 axios.defaults.baseURL = process.env.REACT_APP_BASE_URL;
-axios.defaults.headers["Content-Type"] = "application/json";
-axios.defaults.headers["Api-Key"] = process.env.REACT_APP_API_KEY;
+axios.defaults.headers['Content-Type'] = 'application/json';
+axios.defaults.headers['Api-Key'] = process.env.REACT_APP_API_KEY;
 axios.defaults.headers.withCredentials = true;
 
 axios.interceptors.request.use(
@@ -19,7 +19,7 @@ axios.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 
 axios.interceptors.response.use(
@@ -32,5 +32,5 @@ axios.interceptors.response.use(
     }
 
     return Promise.reject(error);
-  }
+  },
 );

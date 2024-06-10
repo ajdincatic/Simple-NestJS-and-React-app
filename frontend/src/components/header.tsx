@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavDropdown } from 'react-bootstrap';
-import { logout } from '../redux/reducers/auth';
+import { logout } from '../redux/reducers/login';
 import { useAppDispatch } from '../shared/custom-hooks';
 
 import Container from 'react-bootstrap/Container';

@@ -7,25 +7,27 @@ import {
   PURGE,
   REGISTER,
   REHYDRATE,
-} from "redux-persist";
-import storage from "redux-persist/lib/storage";
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import authReducer from "./reducers/auth";
+import loginReducer from './reducers/login';
+import registerReducer from './reducers/register';
 
 const persistConfig = {
-  key: "root",
+  key: 'root',
   storage,
 };
 
 const rootReducers = combineReducers({
-  auth: persistReducer(persistConfig, authReducer),
+  auth: persistReducer(persistConfig, loginReducer),
+  registerReducer,
 });
 
 export const store = configureStore({
   reducer: rootReducers,
-  devTools: process.env.NODE_ENV === "development",
+  devTools: process.env.NODE_ENV === 'development',
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {

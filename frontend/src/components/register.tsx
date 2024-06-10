@@ -3,9 +3,15 @@ import { useForm, Controller } from 'react-hook-form';
 import { Alert, Container } from 'react-bootstrap';
 import { CustomInput, InputTypes } from './shared/custom-input';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../shared/custom-hooks';
+import { userRegister } from '../redux/reducers/register';
+import { RegisterPayload } from '../shared/types';
+import { endpoints } from '../shared/constants';
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from './styles/register.module.css';
+import axios from 'axios';
 
 interface FormData {
   firstName: string;
@@ -16,6 +22,7 @@ interface FormData {
 }
 
 export const Register = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const {
@@ -53,12 +60,45 @@ export const Register = () => {
   const onSubmit = async (data: FormData) => {
     if (data.photos.length < 4) {
       setError('At least 4 photos should be selected.');
-
       setTimeout(() => {
         setError('');
       }, 3000);
-
       return;
+    }
+
+    try {
+      const formData = new FormData();
+      Array.from(data.photos).forEach((file) => {
+        formData.append('files', file);
+      });
+
+      const uploadResponse = await axios.post(
+        endpoints.IMAGE_UPLOAD,
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+
+      const photoUrls = uploadResponse.data.successfull;
+
+      const registerPayload: RegisterPayload = {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        email: data.email,
+        password: data.password,
+        photos: photoUrls,
+      };
+
+      await dispatch(userRegister(registerPayload)).unwrap();
+      navigate('/login');
+    } catch (err) {
+      setError(err?.message);
+      setTimeout(() => {
+        setError('');
+      }, 3000);
     }
   };
 

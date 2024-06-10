@@ -6,7 +6,6 @@ import {
   MaxLength,
   ArrayMinSize,
   IsArray,
-  IsUrl,
   Matches,
 } from 'class-validator';
 
@@ -39,6 +38,9 @@ export class RegisterUserDto {
   @ApiProperty()
   @IsArray()
   @ArrayMinSize(4, { message: 'At least 4 photos must be uploaded' })
-  @IsUrl({}, { each: true, message: 'Each photo must be a valid URL' })
+  @Matches(/^https?:\/\/.*\..*$/, {
+    each: true,
+    message: 'Each photo must be a valid URL',
+  })
   photos: string[];
 }
