@@ -20,6 +20,8 @@
 
 6. [Database](#database)
 
+7. [Used libraries](#used-libraries)
+
 ## 1. Introduction
 
 This repository contains code for the backend of the NestJS application.
@@ -169,3 +171,13 @@ Connection with the database is initiated inside the app.module.ts file with the
 Every file in the app that has `.entity.ts` in its name will be processed as a database table. Entity is just one regular class with properties. The only thing that makes entity different from class is the decorators provided by ORM that we use. You can read more about this in TypeORM official documentation. Also, we use `AbstractEntity` class in order to store shared fields that every other entity will have, like id, date of creation, etc.
 
 DB synchronization is turned ON. This means that every time the app runs it checks if there are differences in entity files and DB tables and if there are changes it synchronizes it. You can turn it off by setting synchronize to false but then you should create migration files.
+
+## 7. Used libraries
+
+aws-sdk - used for interacting with AWS S3 service. It provides a comprehensive set of tools for integrating your application with AWS infrastructure.
+
+bcrypt - used for hashing passwords to enhance security. It is a popular library for hashing and comparing passwords to ensure that sensitive information is stored securely.
+
+lodash - used for utility functions for common programming tasks such as manipulating arrays, objects, and strings. Used for converting objects to DTOs.
+
+multer - used for handling file uploads in Node.js applications. It is a middleware for handling multipart/form-data, primarily used for uploading files. In combination with AWS S3 service.
