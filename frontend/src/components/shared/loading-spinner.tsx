@@ -1,7 +1,7 @@
-import { Container } from "react-bootstrap";
-import Spinner from "react-bootstrap/Spinner";
+import { Container } from 'react-bootstrap';
+import Spinner from 'react-bootstrap/Spinner';
 
-import styles from "./styles/loading-spinner.module.css";
+import styles from './styles/loading-spinner.module.css';
 
 type Props = {
   lowHeight?: boolean;
