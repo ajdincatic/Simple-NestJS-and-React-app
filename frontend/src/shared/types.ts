@@ -10,17 +10,6 @@ export interface UserAfterLogin {
   token: TokenPayload;
 }
 
-export interface FormElement {
-  value: any;
-  valid: boolean;
-  touched: boolean;
-  minLength?: number;
-  maxLength?: number;
-  regexCheck?: RegExp;
-  shouldValidate?: boolean;
-  [key: string]: any;
-}
-
 export type LoginPayload = {
   email: string;
   password: string;

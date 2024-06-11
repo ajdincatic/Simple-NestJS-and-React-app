@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from '../shared/custom-hooks';
 import { Link } from 'react-router-dom';
 import { routes } from '../shared/constants';
 import { useForm, Controller } from 'react-hook-form';
+
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import styles from './styles/login.module.css';
@@ -38,6 +39,7 @@ export const Login = () => {
       await dispatch(userLogin(data)).unwrap();
     } catch (err) {
       setError(err?.message);
+
       setTimeout(() => {
         setError('');
       }, 3000);

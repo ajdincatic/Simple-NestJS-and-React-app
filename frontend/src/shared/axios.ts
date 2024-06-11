@@ -7,6 +7,7 @@ axios.defaults.headers['Content-Type'] = 'application/json';
 axios.defaults.headers['Api-Key'] = process.env.REACT_APP_API_KEY;
 axios.defaults.headers.withCredentials = true;
 
+// set token for every request
 axios.interceptors.request.use(
   (config) => {
     const token = store?.getState()?.auth?.user?.token || null;
@@ -22,6 +23,7 @@ axios.interceptors.request.use(
   },
 );
 
+// use interceptor to check if token is exspired
 axios.interceptors.response.use(
   function (response) {
     return response;
