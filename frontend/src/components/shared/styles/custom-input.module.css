@@ -1,0 +1,11 @@
+.formText {
+  margin-top: 0.25rem;
+  font-size: 0.875em;
+  color: red;
+}
+
+.customFileButton input[type="file"] {
+  width: 107px !important;
+  min-width: 107px !important;
+  max-width: 107px !important;
+}

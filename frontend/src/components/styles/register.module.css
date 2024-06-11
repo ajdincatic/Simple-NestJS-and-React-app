@@ -1,0 +1,11 @@
+.imagePreviews {
+  margin-bottom: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.imagePreviews img {
+  max-width: 200px;
+}
